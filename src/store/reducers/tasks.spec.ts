@@ -1,5 +1,5 @@
 import reducer, { initialState } from './tasks'
-import { FETCH_TASKS_PENDING, FETCH_TASKS_SUCCESS, FETCH_TASKS_ERROR, DELETE_TASK, ADD_TASK, TOGGLE_TASK } from '../actions';
+import { FETCH_TASKS_PENDING, FETCH_TASKS_SUCCESS, FETCH_TASKS_ERROR, DELETE_TASK, ADD_TASK, TOGGLE_TASK } from '../constants/tasks';
 
 describe('tasks reducer', () => {
 
@@ -16,25 +16,25 @@ describe('tasks reducer', () => {
   });
 
   it('FETCH_TASKS_PENDING after error', () => {
-    const initialStateWithError = {
+    const stateBefore = {
       tasks: [],
       isLoading: true,
-      error: 'Unknown error',
+      error: '500 server error',
     };
 
     const action = {
       type: FETCH_TASKS_PENDING,
     };
 
-    expect(reducer(initialStateWithError, action)).toEqual({
-      ...initialStateWithError,
+    expect(reducer(stateBefore, action)).toEqual({
+      ...stateBefore,
       isLoading: true,
       error: null,
     });
   });
 
   it('FETCH_TASKS_SUCCESS', () => {
-    const initialState = {
+    const stateBefore = {
       tasks: [],
       isLoading: true,
       error: null,
@@ -43,40 +43,41 @@ describe('tasks reducer', () => {
     const action = {
       type: FETCH_TASKS_SUCCESS,
       payload: [
-        { userId: 1, id: 101, title: 'explicabo enim cumque porro aperiam occaecati minima', completed: false },
+        { userId: 1, id: 101, title: 'explicabo enim', completed: false },
         { userId: 1, id: 102, title: 'sed ab consequatur', completed: false },
       ],
     };
 
-    expect(reducer(initialState, action)).toEqual({
-      ...initialState,
+    expect(reducer(stateBefore, action)).toEqual({
+      ...stateBefore,
       isLoading: false,
       tasks: action.payload,
     });
   });
 
   it('FETCH_TASKS_ERROR', () => {
-    const initialState = {
+    const stateBefore = {
       tasks: [],
-      isLoading: false,
+      isLoading: true,
       error: null,
     };
 
     const action = {
       type: FETCH_TASKS_ERROR,
-      payload: { error: 'Unknown error' },
+      payload: { error: '500 server error' },
     };
 
-    expect(reducer(initialState, action)).toEqual({
-      ...initialState,
-      error: 'Unknown error',
+    expect(reducer(stateBefore, action)).toEqual({
+      ...stateBefore,
+      isLoading: false,
+      error: action.payload.error,
     });
   });
 
   it('TOGGLE_TASK', () => {
-    const initialState = {
+    const stateBefore = {
       tasks: [
-        { userId: 1, id: 101, title: 'explicabo enim cumque porro aperiam occaecati minima', completed: false },
+        { userId: 1, id: 101, title: 'explicabo enim', completed: false },
         { userId: 1, id: 102, title: 'sed ab consequatur', completed: false },
       ],
       isLoading: false,
@@ -88,19 +89,19 @@ describe('tasks reducer', () => {
       payload: { id: 102 },
     };
 
-    expect(reducer(initialState, action)).toEqual({
-      ...initialState,
+    expect(reducer(stateBefore, action)).toEqual({
+      ...stateBefore,
       tasks: [
-        { userId: 1, id: 101, title: 'explicabo enim cumque porro aperiam occaecati minima', completed: false },
+        { userId: 1, id: 101, title: 'explicabo enim', completed: false },
         { userId: 1, id: 102, title: 'sed ab consequatur', completed: true },
       ],
     });
   });
 
   it('DELETE_TASK', () => {
-    const initialState = {
+    const stateBefore = {
       tasks: [
-        { userId: 1, id: 101, title: 'explicabo enim cumque porro aperiam occaecati minima', completed: false },
+        { userId: 1, id: 101, title: 'explicabo enim', completed: false },
         { userId: 1, id: 102, title: 'sed ab consequatur', completed: false },
       ],
       isLoading: false,
@@ -112,8 +113,8 @@ describe('tasks reducer', () => {
       payload: { id: 101 },
     };
 
-    expect(reducer(initialState, action)).toEqual({
-      ...initialState,
+    expect(reducer(stateBefore, action)).toEqual({
+      ...stateBefore,
       tasks: [
         { userId: 1, id: 102, title: 'sed ab consequatur', completed: false },
       ],
@@ -121,9 +122,9 @@ describe('tasks reducer', () => {
   });
 
   it('ADD_TASK', () => {
-    const initialState = {
+    const stateBefore = {
       tasks: [
-        { userId: 1, id: 101, title: 'explicabo enim cumque porro aperiam occaecati minima', completed: false },
+        { userId: 1, id: 101, title: 'explicabo enim', completed: false },
       ],
       isLoading: false,
       error: null,
@@ -134,10 +135,10 @@ describe('tasks reducer', () => {
       payload: { value: 'sed ab consequatur' },
     };
 
-    expect(reducer(initialState, action)).toEqual({
-      ...initialState,
+    expect(reducer(stateBefore, action)).toEqual({
+      ...stateBefore,
       tasks: [
-        { userId: 1, id: 101, title: 'explicabo enim cumque porro aperiam occaecati minima', completed: false },
+        { userId: 1, id: 101, title: 'explicabo enim', completed: false },
         { userId: 1, id: 102, title: 'sed ab consequatur', completed: false },
       ],
     });

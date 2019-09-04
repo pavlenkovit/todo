@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import fetchTasksAction from '../../managers/fetchTasks';
+import { getTasks } from 'store/actions/tasks';
 
 import TodoList from './TodoList';
 
@@ -19,7 +19,7 @@ const mapStateToProps = (state: any) => {
 };
 
 const mapDispatchToProps = (dispatch: any): IDispatchFromPropsTodoList => bindActionCreators({
-  fetchTasks: fetchTasksAction,
+  fetchTasks: getTasks,
 }, dispatch);
 
 export default connect<IStateFromPropsTodoList, IDispatchFromPropsTodoList, void>(

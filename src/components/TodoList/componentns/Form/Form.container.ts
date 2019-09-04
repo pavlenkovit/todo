@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import Form from './Form';
-import { addTask } from '../../../../store/actions';
+import { addTask } from '../../../../store/actions/tasks';
 
 export interface IDispatchFromPropsForm {
   addTask: (value: string) => void;

@@ -5,8 +5,8 @@ import {
   TOGGLE_TASK,
   ADD_TASK,
   DELETE_TASK,
-} from '../actions';
-import { IAction } from '../actions';
+} from '../constants/tasks';
+import { IAction } from '../models/actions';
 import { ITask } from '../../models/tasks';
 
 export interface IStateTasksReducer {
@@ -40,6 +40,7 @@ export default (state = initialState, action: IAction) => {
       const { payload: { error } } = action;
       return {
         ...state,
+        isLoading: false,
         error,
       };
     case TOGGLE_TASK:
