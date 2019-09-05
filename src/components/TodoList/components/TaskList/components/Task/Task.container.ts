@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import Task from './Task';
-import { deleteTask, toggleTask } from '../../../../store/actions/tasks';
+import { deleteTask, toggleTask } from '../../../../../../store/actions/tasks';
 
 export interface IDispatchFromPropsTask {
   onToggle: (id: number) => void;

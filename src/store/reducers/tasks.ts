@@ -76,6 +76,7 @@ export default (state = initialState, action: IAction) => {
           if (task.id !== action.payload.id) {
             return task;
           }
+          return null;
         }),
       };
     default:

@@ -1,7 +1,7 @@
 import reducer, { initialState } from './tasks'
 import { FETCH_TASKS_PENDING, FETCH_TASKS_SUCCESS, FETCH_TASKS_ERROR, DELETE_TASK, ADD_TASK, TOGGLE_TASK } from '../constants/tasks';
 
-describe('tasks reducer', () => {
+describe('Tasks reducer', () => {
 
   it('FETCH_TASKS_PENDING after situation without error', () => {
     const action = {

@@ -6,12 +6,13 @@ import {
   ADD_TASK,
   DELETE_TASK,
 } from '../constants/tasks';
+import { ITask } from '../../models/tasks';
 
 export const fetchTasksPending = () => ({
   type: FETCH_TASKS_PENDING,
 });
 
-export const fetchTasksSuccess = (payload: any) => ({
+export const fetchTasksSuccess = (payload: ITask[]) => ({
   type: FETCH_TASKS_SUCCESS,
   payload,
 });
@@ -24,7 +25,7 @@ export const fetchTasksError = (payload: any) => ({
 export const getTasks = () => {
   return (dispatch: any) => {
     dispatch(fetchTasksPending());
-    fetch('https://jsonplaceholder.typicode.com/todos?_limit=30')
+    fetch('https://jsonplaceholder.typicode.com/todos?_limit=20')
       .then(res => res.json())
       .then(res => {
         if (res.error) {

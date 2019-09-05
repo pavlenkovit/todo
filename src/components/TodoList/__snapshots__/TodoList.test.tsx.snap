@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TodoList TodoList initial renders properly 1`] = `ShallowWrapper {}`;
+
+exports[`TodoList TodoList isLoading renders properly 1`] = `ShallowWrapper {}`;
+
+exports[`TodoList TodoList render <TodoList /> renders properly 1`] = `ShallowWrapper {}`;
+
+exports[`TodoList TodoList with error renders properly 1`] = `ShallowWrapper {}`;
