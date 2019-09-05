@@ -20,7 +20,7 @@ const Form: React.SFC<IDispatchFromPropsForm> = ({ addTask }) => {
   return (
     <div className={styles.container}>
       <input type="text" onChange={handleChange} value={value} className={styles.input} />
-      <button onClick={onSubmit} className={styles.button}>Add</button>
+      <button id="button" onClick={onSubmit} className={styles.button}>Add</button>
     </div>
   );
 };
