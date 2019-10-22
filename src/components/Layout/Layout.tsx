@@ -1,16 +1,21 @@
 import React from 'react';
-
-import styles from './Layout.module.scss';
+import styled from 'styled-components';
 
 interface IProps {
   children: React.ReactNode;
 }
 
-const Layout: React.SFC<IProps> = ({ children }) => {
+const Wrapper = styled.section`
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 15px;
+`;
+
+const Layout: React.FC<IProps> = ({ children }) => {
   return (
-    <div className={styles.container}>
+    <Wrapper>
       {children}
-    </div>
+    </Wrapper>
   );
 };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CheckMark: React.SFC = () => {
+const CheckMark: React.FC = () => {
   return (
     <svg width="20px" height="15px" viewBox="0 0 20 15">
       <defs>

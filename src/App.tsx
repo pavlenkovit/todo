@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 import TodoList from './components/TodoList';
 import Layout from './components/Layout';
 
-const App: React.SFC = () => {
+const App: FC = () => {
   return (
     <Layout>
       <TodoList />

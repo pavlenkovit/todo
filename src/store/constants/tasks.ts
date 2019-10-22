@@ -1,7 +1,0 @@
-export const FETCH_TASKS_PENDING = 'FETCH_TASKS_PENDING';
-export const FETCH_TASKS_SUCCESS = 'FETCH_TASKS_SUCCESS';
-export const FETCH_TASKS_ERROR = 'FETCH_TASKS_ERROR';
-
-export const TOGGLE_TASK = 'TOGGLE_TASK';
-export const ADD_TASK = 'ADD_TASK';
-export const DELETE_TASK = 'DELETE_TASK';

@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getTasks } from 'store/actions/tasks';
 
 import TodoList from './TodoList';
 
 import { IStateTasksReducer } from '../../store/reducers/tasks';
+import { getTasks } from '../../store/actions/tasks';
 
 export interface IStateFromPropsTodoList extends IStateTasksReducer {
 }
@@ -23,5 +23,5 @@ const mapDispatchToProps = (dispatch: any): IDispatchFromPropsTodoList => bindAc
 }, dispatch);
 
 export default connect<IStateFromPropsTodoList, IDispatchFromPropsTodoList, void>(
-  mapStateToProps, mapDispatchToProps
+  mapStateToProps, mapDispatchToProps,
 )(TodoList);

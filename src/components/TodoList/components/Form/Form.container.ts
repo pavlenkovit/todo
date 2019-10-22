@@ -7,12 +7,8 @@ export interface IDispatchFromPropsForm {
   addTask: (value: string) => void;
 }
 
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    addTask: (value: string) => dispatch(addTask({ value })),
-  };
-};
+const mapDispatchToProps = { addTask };
 
 export default connect<null, IDispatchFromPropsForm, void>(
-  null, mapDispatchToProps
+  null, mapDispatchToProps,
 )(Form);

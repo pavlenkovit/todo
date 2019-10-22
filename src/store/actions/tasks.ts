@@ -1,26 +1,13 @@
-import {
-  FETCH_TASKS_PENDING,
-  FETCH_TASKS_SUCCESS,
-  FETCH_TASKS_ERROR,
-  TOGGLE_TASK,
-  ADD_TASK,
-  DELETE_TASK,
-} from '../constants/tasks';
+import { createAction } from 'redux-actions';
+
 import { ITask } from '../../models/tasks';
 
-export const fetchTasksPending = () => ({
-  type: FETCH_TASKS_PENDING,
-});
-
-export const fetchTasksSuccess = (payload: ITask[]) => ({
-  type: FETCH_TASKS_SUCCESS,
-  payload,
-});
-
-export const fetchTasksError = (payload: any) => ({
-  type: FETCH_TASKS_ERROR,
-  payload,
-});
+export const fetchTasksPending = createAction('FETCH_TASKS_PENDING');
+export const fetchTasksSuccess = createAction('FETCH_TASKS_SUCCESS', (tasks: ITask[]) => ({ tasks }));
+export const fetchTasksError = createAction('FETCH_TASKS_ERROR', (payload: any) => payload);
+export const toggleTask = createAction('TOGGLE_TASK', (id: number) => ({ id }));
+export const addTask = createAction('ADD_TASK', (value: string) => ({ value }));
+export const deleteTask = createAction('DELETE_TASK', (id: number) => ({ id }));
 
 export const getTasks = () => {
   return (dispatch: any) => {
@@ -29,7 +16,7 @@ export const getTasks = () => {
       .then(res => res.json())
       .then(res => {
         if (res.error) {
-          throw(res.error);
+          throw (res.error);
         }
         dispatch(fetchTasksSuccess(res));
         return res;
@@ -39,18 +26,3 @@ export const getTasks = () => {
       });
   };
 };
-
-export const toggleTask = (payload: any) => ({
-  type: TOGGLE_TASK,
-  payload,
-});
-
-export const addTask = (payload: any) => ({
-  type: ADD_TASK,
-  payload,
-});
-
-export const deleteTask = (payload: any) => ({
-  type: DELETE_TASK,
-  payload,
-});

@@ -1,33 +1,33 @@
 {
-    "defaultSeverity": "error",
-    "extends": [
-        "tslint:latest",
-        "tslint-config-airbnb"
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:latest",
+    "tslint-config-airbnb"
+  ],
+  "linterOptions": {
+    "exclude": [
+      "src/serviceWorker.ts"
+    ]
+  },
+  "jsRules": {},
+  "rules": {
+    "variable-name": false,
+    "ordered-imports": [
+      true,
+      {
+        "import-sources-order": "any",
+        "grouped-imports": true
+      }
     ],
-    "linterOptions": {
-        "exclude": [
-            "src/serviceWorker.ts"
-        ]
-    },
-    "jsRules": {},
-    "rules": {
-        "variable-name": false,
-        "ordered-imports": [
-            true,
-            {
-                "import-sources-order": "any",
-                "grouped-imports": true
-            }
-        ],
-        "object-literal-sort-keys": false,
-        "import-name": false,
-        "comment-format": false,
-        "align": false,
-        "function-name": false,
-        "max-line-length": false,
-        "no-increment-decrement": false,
-        "no-submodule-imports": false,
-        "no-implicit-dependencies": false
-    },
-    "rulesDirectory": []
+    "object-literal-sort-keys": false,
+    "import-name": false,
+    "comment-format": false,
+    "align": false,
+    "function-name": false,
+    "max-line-length": false,
+    "no-increment-decrement": false,
+    "no-submodule-imports": false,
+    "no-implicit-dependencies": false
+  },
+  "rulesDirectory": []
 }

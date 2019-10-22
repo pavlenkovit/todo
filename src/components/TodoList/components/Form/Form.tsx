@@ -1,8 +1,33 @@
 import React, { useState } from 'react';
-import styles from './Form.module.scss';
+import styled from 'styled-components';
 import { IDispatchFromPropsForm } from './Form.container';
 
-const Form: React.SFC<IDispatchFromPropsForm> = ({ addTask }) => {
+const Container = styled.div`
+  margin: 15px 0;
+  display: flex;
+`;
+
+const Input = styled.input`
+  margin-right: 15px;
+  flex: 1 1 auto;
+  width: 1%;
+  border: solid 2px #000;
+  font-size: 20px;
+  border-radius: 3px;
+  padding: 0.35em 0.5em;
+`;
+
+const Button = styled.button`
+  width: 120px;
+  border-radius: 3px;
+  background: #414141;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+`;
+
+const Form: React.FC<IDispatchFromPropsForm> = ({ addTask }) => {
   const [value, onChange] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,10 +43,10 @@ const Form: React.SFC<IDispatchFromPropsForm> = ({ addTask }) => {
   };
 
   return (
-    <div className={styles.container}>
-      <input type="text" onChange={handleChange} value={value} className={styles.input} />
-      <button id="button" onClick={onSubmit} className={styles.button}>Add</button>
-    </div>
+    <Container>
+      <Input type="text" onChange={handleChange} value={value} />
+      <Button id="button" onClick={onSubmit}>Add</Button>
+    </Container>
   );
 };
 

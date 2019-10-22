@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.vscode/
+coverage/
+*.DS_Store
+src/serviceWorker.ts
+src/react-app-env.d.ts
+build/
+api/
