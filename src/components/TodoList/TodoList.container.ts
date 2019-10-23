@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import TodoList from './TodoList';
 
 import { IStateTasksReducer } from '../../store/reducers/tasks';
-import { getTasks } from '../../store/actions/tasks';
+import { getTasks } from '../../store/effects/tasks.effects';
 
 export interface IStateFromPropsTodoList extends IStateTasksReducer {
 }

@@ -8,21 +8,3 @@ export const fetchTasksError = createAction('FETCH_TASKS_ERROR', (payload: any) 
 export const toggleTask = createAction('TOGGLE_TASK', (id: number) => ({ id }));
 export const addTask = createAction('ADD_TASK', (value: string) => ({ value }));
 export const deleteTask = createAction('DELETE_TASK', (id: number) => ({ id }));
-
-export const getTasks = () => {
-  return (dispatch: any) => {
-    dispatch(fetchTasksPending());
-    fetch('https://jsonplaceholder.typicode.com/todos?_limit=20')
-      .then(res => res.json())
-      .then(res => {
-        if (res.error) {
-          throw (res.error);
-        }
-        dispatch(fetchTasksSuccess(res));
-        return res;
-      })
-      .catch(error => {
-        dispatch(fetchTasksError(error));
-      });
-  };
-};
