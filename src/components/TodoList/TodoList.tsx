@@ -5,7 +5,7 @@ import Form from './components/Form';
 
 import TaskList from './components/TaskList';
 import { IStore } from '../../store';
-import { GetTasks } from '../../store/actions/tasks';
+import { GetTasks } from '../../store/actions/tasks.actions';
 
 const Container = styled.div`
   display: flex;

@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import { GetTasks, ToggleTask, AddTask, DeleteTask } from '../actions/tasks';
+import { GetTasks, ToggleTask, AddTask, DeleteTask } from '../actions/tasks.actions';
 
 export interface ITask {
   userId: number;
@@ -21,7 +21,7 @@ export const initialState: ITasksState = {
 };
 
 export default handleActions({
-  [GetTasks.Pending](state) {
+  [GetTasks.Pending](state: ITasksState) {
     return {
       ...state,
       isLoading: true,
@@ -29,8 +29,7 @@ export default handleActions({
     };
   },
 
-  [GetTasks.Success](state: ITasksState, { payload }: any) {
-    const { tasks } = payload;
+  [GetTasks.Success](state: ITasksState, { payload: { tasks } }: any) {
     return {
       ...state,
       isLoading: false,
@@ -38,8 +37,7 @@ export default handleActions({
     };
   },
 
-  [GetTasks.Error](state: ITasksState, { payload }: any) {
-    const { error } = payload;
+  [GetTasks.Error](state: ITasksState, { payload: { error } }: any) {
     return {
       ...state,
       isLoading: false,
@@ -47,8 +45,7 @@ export default handleActions({
     };
   },
 
-  [ToggleTask.Success](state: ITasksState, { payload }: any) {
-    const { id } = payload;
+  [ToggleTask.Success](state: ITasksState, { payload: { id } }: any) {
     return {
       ...state,
       tasks: state.tasks.map(task => {
@@ -60,8 +57,7 @@ export default handleActions({
     };
   },
 
-  [AddTask.Success](state: ITasksState, { payload }: any) {
-    const { value } = payload;
+  [AddTask.Success](state: ITasksState, { payload: { value } }: any) {
     const { tasks } = state;
     const lastId = tasks.length > 0 ? tasks[tasks.length - 1].id : 0;
     return {
@@ -77,8 +73,7 @@ export default handleActions({
     };
   },
 
-  [DeleteTask.Success](state: ITasksState, { payload }: any) {
-    const { id } = payload;
+  [DeleteTask.Success](state: ITasksState, { payload: { id } }: any) {
     return {
       ...state,
       tasks: state.tasks.filter(task => {

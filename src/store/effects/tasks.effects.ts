@@ -3,8 +3,8 @@ import { ActionsObservable, ofType } from 'redux-observable';
 import { of } from 'rxjs';
 import { Action } from 'redux-actions';
 
-import { getTasks } from '../services/tasks.service';
-import { GetTasks } from '../actions/tasks';
+import { getTasks } from '../services/tasks.services';
+import { GetTasks } from '../actions/tasks.actions';
 
 /** Эффект получения списка задач */
 export const getTasks$ = (actions$: ActionsObservable<Action<undefined>>) => {

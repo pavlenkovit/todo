@@ -1,5 +1,5 @@
 import { createActions } from 'redux-actions';
-import { ITask } from '../reducers/tasks';
+import { ITask } from '../reducers/tasks.reducers';
 
 export enum GetTasks {
   Pending = '[Pending] Получение списка задач',

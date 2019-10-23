@@ -1,6 +1,6 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
-import tasks, { ITasksState } from './reducers/tasks';
+import tasks, { ITasksState } from './reducers/tasks.reducers';
 import { getTasks$ } from './effects/tasks.effects';
 
 export interface IStore {

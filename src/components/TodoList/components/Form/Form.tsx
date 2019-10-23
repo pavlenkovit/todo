@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { AddTask } from '../../../../store/actions/tasks';
+import { AddTask } from '../../../../store/actions/tasks.actions';
 
 const Container = styled.div`
   margin: 15px 0;

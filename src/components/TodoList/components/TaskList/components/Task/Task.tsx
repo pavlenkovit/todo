@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 import ButtonDelete from './components/ButtonDelete';
 import Checkbox from './components/Checkbox';
-import { ITask } from '../../../../../../store/reducers/tasks';
-import { DeleteTask, ToggleTask } from '../../../../../../store/actions/tasks';
+import { ITask } from '../../../../../../store/reducers/tasks.reducers';
+import { DeleteTask, ToggleTask } from '../../../../../../store/actions/tasks.actions';
 
 export interface ITaskProps extends ITask {
 }
