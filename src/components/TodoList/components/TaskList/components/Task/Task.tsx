@@ -1,12 +1,13 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import { ITask } from '../../../../../../models/tasks';
-import { IDispatchFromPropsTask } from './Task.container';
 import ButtonDelete from './components/ButtonDelete';
 import Checkbox from './components/Checkbox';
+import { ITask } from '../../../../../../store/reducers/tasks';
+import { DeleteTask, ToggleTask } from '../../../../../../store/actions/tasks';
 
-export interface ITaskProps extends ITask, IDispatchFromPropsTask {
+export interface ITaskProps extends ITask {
 }
 
 interface IItemProps {
@@ -31,13 +32,15 @@ const Title = styled.div`
   flex: 1 1 auto;
 `;
 
-const Task: React.FC<ITaskProps> = ({ id, title, completed, toggleTask, deleteTask }) => {
+const Task: React.FC<ITaskProps> = ({ id, title, completed }) => {
+  const dispatch = useDispatch();
+
   const handleClickOnItem = () => {
-    toggleTask(id);
+    dispatch({ type: ToggleTask.Success, payload: { id } });
   };
 
   const handleClickOnDeleteButton = () => {
-    deleteTask(id);
+    dispatch({ type: DeleteTask.Success, payload: { id } });
   };
 
   return (

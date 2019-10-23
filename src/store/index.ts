@@ -1,9 +1,25 @@
-import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
-import thunk from 'redux-thunk';
-import * as reducers from './reducers';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
+import { combineEpics, createEpicMiddleware } from 'redux-observable';
+import tasks, { ITasksState } from './reducers/tasks';
+import { getTasks$ } from './effects/tasks.effects';
 
-const reducer = combineReducers(reducers);
+export interface IStore {
+  tasks: ITasksState,
+}
+
+const observableMiddleware = createEpicMiddleware();
+
+const reducers = combineReducers({
+  tasks,
+});
+
 export const store = createStore(
-  reducer,
-  compose(applyMiddleware(thunk)),
+  reducers,
+  applyMiddleware(observableMiddleware),
+);
+
+observableMiddleware.run(
+  combineEpics<any>(
+    getTasks$,
+  ),
 );

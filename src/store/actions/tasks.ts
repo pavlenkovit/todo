@@ -1,10 +1,30 @@
-import { createAction } from 'redux-actions';
+import { createActions } from 'redux-actions';
+import { ITask } from '../reducers/tasks';
 
-import { ITask } from '../../models/tasks';
+export enum GetTasks {
+  Pending = '[Pending] Получение списка задач',
+  Success = '[Success] Получение списка задач',
+  Error = '[Error] Получение списка задач',
+}
 
-export const fetchTasksPending = createAction('FETCH_TASKS_PENDING');
-export const fetchTasksSuccess = createAction('FETCH_TASKS_SUCCESS', (tasks: ITask[]) => ({ tasks }));
-export const fetchTasksError = createAction('FETCH_TASKS_ERROR', (payload: any) => payload);
-export const toggleTask = createAction('TOGGLE_TASK', (id: number) => ({ id }));
-export const addTask = createAction('ADD_TASK', (value: string) => ({ value }));
-export const deleteTask = createAction('DELETE_TASK', (id: number) => ({ id }));
+export enum ToggleTask {
+  Success = '[Success] Переключение статуса задачи',
+}
+
+export enum AddTask {
+  Success = '[Success] Добавление задачи',
+}
+
+export enum DeleteTask {
+  Success = '[Success] Удаление задачи',
+}
+
+createActions({
+  [GetTasks.Pending]: undefined,
+  [GetTasks.Success]: (tasks: ITask[]) => ({ tasks }),
+  [GetTasks.Error]: (error: string) => ({ error }),
+
+  [ToggleTask.Success]: (id: number) => ({ id }),
+  [AddTask.Success]: (value: string) => ({ value }),
+  [DeleteTask.Success]: (id: number) => ({ id }),
+});

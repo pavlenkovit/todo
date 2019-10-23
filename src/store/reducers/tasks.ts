@@ -1,22 +1,27 @@
 import { handleActions } from 'redux-actions';
-import { fetchTasksPending, fetchTasksSuccess, fetchTasksError, toggleTask, addTask, deleteTask } from '../actions/tasks';
+import { GetTasks, ToggleTask, AddTask, DeleteTask } from '../actions/tasks';
 
-import { ITask } from '../../models/tasks';
+export interface ITask {
+  userId: number;
+  id: number;
+  title: string;
+  completed: boolean;
+}
 
-export interface IStateTasksReducer {
+export interface ITasksState {
   tasks: ITask[];
   isLoading: boolean;
   error: null | string;
 }
 
-export const initialState: IStateTasksReducer = {
+export const initialState: ITasksState = {
   tasks: [],
   isLoading: false,
   error: null,
 };
 
 export default handleActions({
-  [fetchTasksPending.toString()](state) {
+  [GetTasks.Pending](state) {
     return {
       ...state,
       isLoading: true,
@@ -24,7 +29,7 @@ export default handleActions({
     };
   },
 
-  [fetchTasksSuccess.toString()](state, { payload }: any) {
+  [GetTasks.Success](state: ITasksState, { payload }: any) {
     const { tasks } = payload;
     return {
       ...state,
@@ -33,7 +38,7 @@ export default handleActions({
     };
   },
 
-  [fetchTasksError.toString()](state, { payload }: any) {
+  [GetTasks.Error](state: ITasksState, { payload }: any) {
     const { error } = payload;
     return {
       ...state,
@@ -42,7 +47,7 @@ export default handleActions({
     };
   },
 
-  [toggleTask.toString()](state, { payload }: any) {
+  [ToggleTask.Success](state: ITasksState, { payload }: any) {
     const { id } = payload;
     return {
       ...state,
@@ -55,25 +60,24 @@ export default handleActions({
     };
   },
 
-  [addTask.toString()](state, { payload }: any) {
+  [AddTask.Success](state: ITasksState, { payload }: any) {
     const { value } = payload;
     const { tasks } = state;
     const lastId = tasks.length > 0 ? tasks[tasks.length - 1].id : 0;
-    const concatTasks = tasks.concat([
-      {
-        userId: 1,
-        id: lastId + 1,
-        title: value,
-        completed: false,
-      },
-    ]);
     return {
       ...state,
-      tasks: concatTasks,
+      tasks: tasks.concat([
+        {
+          userId: 1,
+          id: lastId + 1,
+          title: value,
+          completed: false,
+        },
+      ]),
     };
   },
 
-  [deleteTask.toString()](state, { payload }: any) {
+  [DeleteTask.Success](state: ITasksState, { payload }: any) {
     const { id } = payload;
     return {
       ...state,

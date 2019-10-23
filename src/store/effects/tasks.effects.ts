@@ -1,13 +1,30 @@
-import { fetchTasksError, fetchTasksPending, fetchTasksSuccess } from '../actions/tasks';
-import { getTasksService } from '../services/tasks.service';
+import { catchError, map, switchMap } from 'rxjs/operators';
+import { ActionsObservable, ofType } from 'redux-observable';
+import { of } from 'rxjs';
+import { Action } from 'redux-actions';
 
-export const getTasks = () => {
-  return (dispatch: any) => {
-    dispatch(fetchTasksPending());
+import { getTasks } from '../services/tasks.service';
+import { GetTasks } from '../actions/tasks';
 
-    getTasksService().subscribe(
-      res => dispatch(fetchTasksSuccess(res)),
-      error => dispatch(fetchTasksError(error)),
-    );
-  };
+/** Эффект получения списка задач */
+export const getTasks$ = (actions$: ActionsObservable<Action<undefined>>) => {
+  return actions$.pipe(
+    ofType(GetTasks.Pending),
+    switchMap(() => {
+      return getTasks().pipe(
+        map(data => {
+          return {
+            type: GetTasks.Success,
+            payload: { tasks: data },
+          };
+        }),
+        catchError((error: string) => {
+          return of({
+            type: GetTasks.Error,
+            payload: { error },
+          });
+        }),
+      );
+    }),
+  );
 };

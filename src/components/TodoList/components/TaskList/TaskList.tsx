@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ITask } from '../../../../models/tasks';
 import Task from './components/Task';
+import { ITask } from '../../../../store/reducers/tasks';
 
 export interface ITaskListProps {
   list: ITask[];

@@ -1,12 +1,11 @@
 import React, { FC, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { IDispatchFromPropsTodoList, IStateFromPropsTodoList } from './TodoList.container';
 import Form from './components/Form';
 
 import TaskList from './components/TaskList';
-
-export interface ITodoListProps extends IStateFromPropsTodoList, IDispatchFromPropsTodoList {
-}
+import { IStore } from '../../store';
+import { GetTasks } from '../../store/actions/tasks';
 
 const Container = styled.div`
   display: flex;
@@ -19,17 +18,19 @@ const Title = styled.h1`
   margin: 15px 0;
 `;
 
+const TodoList: FC = () => {
+  const { tasks, isLoading, error } = useSelector((state: IStore) => state.tasks);
+  const dispatch = useDispatch();
 
-const TodoList: FC<ITodoListProps> = ({ tasks, isLoading, error, fetchTasks }) => {
   useEffect(() => {
-    fetchTasks();
+    dispatch({ type: GetTasks.Pending });
   }, []);
 
   if (isLoading) {
     return <p>Loading...</p>;
   }
 
-  if (error) {
+  if (error !== null) {
     return <p>{error}</p>;
   }
 

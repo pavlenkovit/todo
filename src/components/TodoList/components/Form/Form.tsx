@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { IDispatchFromPropsForm } from './Form.container';
+import { AddTask } from '../../../../store/actions/tasks';
 
 const Container = styled.div`
   margin: 15px 0;
@@ -27,8 +28,9 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const Form: React.FC<IDispatchFromPropsForm> = ({ addTask }) => {
+const Form: React.FC = () => {
   const [value, onChange] = useState('');
+  const dispatch = useDispatch();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value);
@@ -38,7 +40,7 @@ const Form: React.FC<IDispatchFromPropsForm> = ({ addTask }) => {
     if (value === '') {
       return;
     }
-    addTask(value);
+    dispatch({ type: AddTask.Success, payload: { value } });
     onChange('');
   };
 
