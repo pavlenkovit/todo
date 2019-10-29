@@ -12,16 +12,15 @@ export const getTasks$ = (actions$: ActionsObservable<Action<undefined>>) => {
     ofType(GetTasks.Pending),
     switchMap(() => {
       return getTasks().pipe(
-        map(data => {
-          return {
-            type: GetTasks.Success,
-            payload: { tasks: data },
-          };
-        }),
-        catchError((error: string) => {
+        map(data => ({
+          type: GetTasks.Success,
+          payload: { tasks: data },
+        })),
+        catchError(error => {
+          const message = JSON.parse(JSON.stringify(error)).message || 'Неизвестная ошибка';
           return of({
             type: GetTasks.Error,
-            payload: { error },
+            payload: { error: message },
           });
         }),
       );
